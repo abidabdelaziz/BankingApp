@@ -1,0 +1,11 @@
+E:\SoftProjects\BankingApp\bin\Debug\netcoreapp3.0\BankingApp.exe
+E:\SoftProjects\BankingApp\bin\Debug\netcoreapp3.0\BankingApp.deps.json
+E:\SoftProjects\BankingApp\bin\Debug\netcoreapp3.0\BankingApp.runtimeconfig.json
+E:\SoftProjects\BankingApp\bin\Debug\netcoreapp3.0\BankingApp.runtimeconfig.dev.json
+E:\SoftProjects\BankingApp\bin\Debug\netcoreapp3.0\BankingApp.dll
+E:\SoftProjects\BankingApp\bin\Debug\netcoreapp3.0\BankingApp.pdb
+E:\SoftProjects\BankingApp\obj\Debug\netcoreapp3.0\BankingApp.csprojAssemblyReference.cache
+E:\SoftProjects\BankingApp\obj\Debug\netcoreapp3.0\BankingApp.AssemblyInfoInputs.cache
+E:\SoftProjects\BankingApp\obj\Debug\netcoreapp3.0\BankingApp.AssemblyInfo.cs
+E:\SoftProjects\BankingApp\obj\Debug\netcoreapp3.0\BankingApp.dll
+E:\SoftProjects\BankingApp\obj\Debug\netcoreapp3.0\BankingApp.pdb
