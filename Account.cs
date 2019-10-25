@@ -10,6 +10,7 @@ namespace BankingApp
         public List<string> TransactionHistory = new List<string>();
         public string firstName { get; set; }
         public string lastName { get; set; }
+        public string accountType { get; set; }
 
         //Open Account
     }
