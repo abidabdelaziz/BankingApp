@@ -21,7 +21,9 @@ namespace BankingApp
             while (!endApp)
             {
                 bool exitMenu = false;
-                Console.WriteLine("---------------------------\r");
+
+
+                /*Console.WriteLine("---------------------------\r");
                 Console.WriteLine("Welcome To Your Banking App\r");
                 Console.WriteLine("---------------------------\n");
                 Console.WriteLine("--Press Enter to Continue--\n");
@@ -40,10 +42,11 @@ namespace BankingApp
                 Console.WriteLine("---------------------------\n");
 
                 //Replace This method of setting with validation
-                string lName = Console.ReadLine();
+                string lName = Console.ReadLine();*/
 
+                Register.WelcomePrompt();
 
-                Customer currentCustomer = new Customer(fName, lName);
+                
 
 
                 Console.WriteLine("Welcome {0} {1} ", currentCustomer.firstName, currentCustomer.lastName  );

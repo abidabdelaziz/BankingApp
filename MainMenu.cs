@@ -18,7 +18,18 @@ namespace BankingApp
             Console.WriteLine("\t4 - Loan");
             Console.WriteLine("\t5 - Exit");
 
-            Program.menuOption = Console.ReadLine();
+
+            Console.WriteLine("{0}", Program.custAccounts.Count);
+
+            ProcessAction(Console.ReadLine());
+
+           // Program.menuOption = Console.ReadLine();
+        }
+
+        public static void ExitApp()
+        {
+            Register.WelcomePrompt();
+
         }
 
         public string AccountCheck(string option)
@@ -28,7 +39,7 @@ namespace BankingApp
             return "Account Check";
         }
 
-        public void SetAction( string option)
+        public static void ProcessAction( string option)
         {
 
             switch (option)
@@ -62,8 +73,9 @@ namespace BankingApp
                     break;
 
                 case "5":
-                    //my the the registry prompts part of the registry class and rather 
-                    //than exit to the previous loop, just call the menu again
+                    Console.WriteLine("herro");
+                    Register.WelcomePrompt();
+                    break;
 
                 default:
 

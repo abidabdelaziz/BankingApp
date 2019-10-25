@@ -8,6 +8,38 @@ namespace BankingApp
     {
         public Customer newCust;
 
+        public static void WelcomePrompt()
+        {
+            Console.WriteLine("---------------------------\r");
+            Console.WriteLine("Welcome To Your Banking App\r");
+            Console.WriteLine("---------------------------\n");
+            Console.WriteLine("--Press Enter to Continue--\n");
+
+            string logOn = Console.ReadLine();
+
+            Console.WriteLine("---------------------------\r");
+            Console.WriteLine("Please Type your First Name\r");
+            Console.WriteLine("---------------------------\n");
+
+            //Replace This method of setting with validation
+            string firstName = Console.ReadLine();
+
+            Program.fName = firstName;
+
+            Console.WriteLine("---------------------------\r");
+            Console.WriteLine("Please Type your Last Name\r");
+            Console.WriteLine("---------------------------\n");
+
+            //Replace This method of setting with validation
+            string lastName = Console.ReadLine();
+
+            Program.lName = lastName;
+
+            Program.currentCustomer = new Customer(Program.fName, Program.lName);
+
+            MainMenu.DisplayMenu();
+        }
+
         public Customer RegisterCustomer (string firstn , string lastn)
         {
 
