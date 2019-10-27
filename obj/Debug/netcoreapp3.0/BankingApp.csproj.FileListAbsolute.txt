@@ -20,3 +20,14 @@ C:\Users\Alexander\Desktop\Revature\VS\BankingApp\obj\Debug\netcoreapp3.0\Bankin
 C:\Users\Alexander\Desktop\Revature\VS\BankingApp\obj\Debug\netcoreapp3.0\BankingApp.AssemblyInfo.cs
 C:\Users\Alexander\Desktop\Revature\VS\BankingApp\obj\Debug\netcoreapp3.0\BankingApp.dll
 C:\Users\Alexander\Desktop\Revature\VS\BankingApp\obj\Debug\netcoreapp3.0\BankingApp.pdb
+C:\Users\Abid\Desktop\Revature\BankingApp\bin\Debug\netcoreapp3.0\BankingApp.exe
+C:\Users\Abid\Desktop\Revature\BankingApp\bin\Debug\netcoreapp3.0\BankingApp.deps.json
+C:\Users\Abid\Desktop\Revature\BankingApp\bin\Debug\netcoreapp3.0\BankingApp.runtimeconfig.json
+C:\Users\Abid\Desktop\Revature\BankingApp\bin\Debug\netcoreapp3.0\BankingApp.runtimeconfig.dev.json
+C:\Users\Abid\Desktop\Revature\BankingApp\bin\Debug\netcoreapp3.0\BankingApp.dll
+C:\Users\Abid\Desktop\Revature\BankingApp\bin\Debug\netcoreapp3.0\BankingApp.pdb
+C:\Users\Abid\Desktop\Revature\BankingApp\obj\Debug\netcoreapp3.0\BankingApp.csprojAssemblyReference.cache
+C:\Users\Abid\Desktop\Revature\BankingApp\obj\Debug\netcoreapp3.0\BankingApp.AssemblyInfoInputs.cache
+C:\Users\Abid\Desktop\Revature\BankingApp\obj\Debug\netcoreapp3.0\BankingApp.AssemblyInfo.cs
+C:\Users\Abid\Desktop\Revature\BankingApp\obj\Debug\netcoreapp3.0\BankingApp.dll
+C:\Users\Abid\Desktop\Revature\BankingApp\obj\Debug\netcoreapp3.0\BankingApp.pdb

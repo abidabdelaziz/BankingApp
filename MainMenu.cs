@@ -10,6 +10,8 @@ namespace BankingApp
     {
         public List<Account> mMenuAccounts = new List<Account>();
 
+        public Account tempAccount {get;set;}
+
         public string menuOption { get; set; }
 
 
@@ -22,12 +24,7 @@ namespace BankingApp
             Console.WriteLine("\t - Loan");
             Console.WriteLine("\t - Exit");
 
-
-            Console.WriteLine("{0}", Program.custAccounts.Count);
-
             ProcessAction(Console.ReadLine());
-
-           // Program.menuOption = Console.ReadLine();
         }
 
         public static void ExitApp()
@@ -38,6 +35,50 @@ namespace BankingApp
 
         public static void CreateAccount(string fname, string lname, string account)
         {
+
+            string firstName = fname;
+            string lastName = lname;
+           switch (account)
+            {
+                case "Checking":
+
+                  
+
+                    break;
+                case "Business":
+
+                    break;
+                case "CD":
+                    Console.WriteLine("For what number of months? Please type a number.");
+
+                    int cdMaturity = Convert.ToInt32(Console.ReadLine());
+
+                    Console.WriteLine("What will be your deposity for the {0} month term?", cdMaturity);
+
+                    int cdDeposit = Convert.ToInt32(Console.ReadLine());
+
+
+
+                    CD tempAccount = new CD(firstName, lastName, account, cdMaturity, cdDeposit) { };
+
+                    Console.WriteLine("{0}", tempAccount.firstName);
+                    Program.custAccounts.Add((Account)tempAccount);
+
+                    Console.WriteLine("Thank you for your business.");
+
+                    break;
+
+                case "Loan":
+
+                    break;
+
+                default:
+
+                    MainMenu.DisplayMenu();
+                    break;
+
+            }
+             
 
         }
 
@@ -55,13 +96,18 @@ namespace BankingApp
                 }
                 else
                 {
-                    Console.WriteLine(" Create Account ");
+                    ActionMenu.DisplayAccounts(mMenuAccounts);
+
+
+                    //ActionMenu.DisplayActionMenu(mMenuAccounts);
                 }
 
                
             }
-            catch ( SystemException)
+            catch ( Exception ex)
             {
+                /*var debaccount = Program.custAccounts.First();
+                Console.WriteLine("{0}", debaccount);*/
                 Console.WriteLine("No Such Account exists in your Name ");
                 Console.WriteLine("Create Account of Type Accessed? ( Yes or No )");
 
@@ -90,14 +136,14 @@ namespace BankingApp
             {
                 case "Checking":
                     //Checking
-                    //Check for Account
+                    AccountCheck(Program.fName, Program.lName, option);
                     //Checking Options Pointer
                     Program.menuOption = option;
                     break;
 
                 case "Business":
                     //Business
-                    //Check for Account
+                    AccountCheck(Program.fName, Program.lName, option);
                     //Business Options Pointer 
                     Program.menuOption = option;
                     break;
@@ -112,7 +158,7 @@ namespace BankingApp
 
                 case "Loan":
                     //Loan
-                    //Check for Account
+                    AccountCheck(Program.fName, Program.lName, option);
                     //Loan Options Pointer
                     Program.menuOption = option;
                     break;

@@ -8,5 +8,18 @@ namespace BankingApp
     {
         public int maturity;
 
+
+
+
+        public CD(string fName, string lName, string type, int tmaturity, int deposit)
+        {
+            base.firstName = fName;
+            base.lastName = lName;
+            base.accountType = type;
+            base.sum = deposit;
+            maturity = tmaturity;
+        }
     }
+
 }
+

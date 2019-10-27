@@ -8,19 +8,19 @@
     ".NETCoreApp,Version=v3.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Alexander\\.nuget\\packages\\": {}
+    "C:\\Users\\Abid\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Alexander\\Desktop\\Revature\\VS\\BankingApp\\BankingApp.csproj",
+      "projectUniqueName": "C:\\Users\\Abid\\Desktop\\Revature\\BankingApp\\BankingApp.csproj",
       "projectName": "BankingApp",
-      "projectPath": "C:\\Users\\Alexander\\Desktop\\Revature\\VS\\BankingApp\\BankingApp.csproj",
-      "packagesPath": "C:\\Users\\Alexander\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Alexander\\Desktop\\Revature\\VS\\BankingApp\\obj\\",
+      "projectPath": "C:\\Users\\Abid\\Desktop\\Revature\\BankingApp\\BankingApp.csproj",
+      "packagesPath": "C:\\Users\\Abid\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Abid\\Desktop\\Revature\\BankingApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Alexander\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Abid\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
