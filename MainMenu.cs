@@ -8,7 +8,7 @@ namespace BankingApp
 
     class MainMenu
     {
-        public List<Account> mMenuAccounts = new List<Account>();
+        public static List<Account> mMenuAccounts = new List<Account>();
 
         public Account tempAccount {get;set;}
 
@@ -22,8 +22,11 @@ namespace BankingApp
             Console.WriteLine("\t - Business");
             Console.WriteLine("\t - CD");
             Console.WriteLine("\t - Loan");
+            Console.WriteLine("\t - Open Account");
             Console.WriteLine("\t - Exit");
 
+            var total = mMenuAccounts.Count();
+            
             ProcessAction(Console.ReadLine());
         }
 
@@ -42,10 +45,18 @@ namespace BankingApp
             {
                 case "Checking":
 
-                  
+                    Console.WriteLine("What will be your deposity for the Checking Account?");
+
+                    int checkingDeposit = Convert.ToInt32(Console.ReadLine());
+
+
 
                     break;
                 case "Business":
+
+                    Console.WriteLine("What will be your deposity for the Business Account?");
+
+                    int businessDeposit = Convert.ToInt32(Console.ReadLine());
 
                     break;
                 case "CD":
@@ -57,18 +68,20 @@ namespace BankingApp
 
                     int cdDeposit = Convert.ToInt32(Console.ReadLine());
 
-
-
                     CD tempAccount = new CD(firstName, lastName, account, cdMaturity, cdDeposit) { };
 
-                    Console.WriteLine("{0}", tempAccount.firstName);
                     Program.custAccounts.Add((Account)tempAccount);
-
+                    MainMenu.mMenuAccounts.Add((Account)tempAccount);
                     Console.WriteLine("Thank you for your business.");
+                    MainMenu.DisplayMenu();
 
                     break;
 
                 case "Loan":
+
+                    Console.WriteLine("Please enter a desired amount for your Loan Account.");
+
+                    int loan = Convert.ToInt32(Console.ReadLine());
 
                     break;
 
@@ -84,52 +97,37 @@ namespace BankingApp
 
         public static void AccountCheck(string fname , string lname, string account)
         {
-            try
-            {
+            
                
                 var mMenuAccounts = Program.custAccounts.Where(c => (c.firstName == fname) && (c.lastName == lname) && (c.accountType == account)).ToList<Account>();
-
+           
                 if (!mMenuAccounts.Any())
                 {
-                    //unhandled exception
-                    throw new Exception("Exception Thrown");
+                Console.WriteLine("Hello World");
+                Console.WriteLine("No Such Account exists in your Name ");
+                    Console.WriteLine("Create Account of Type Accessed? ( Yes or No )");
+
+                    var reply = Console.ReadLine();
+
+                    if (reply == "Yes")
+                    {
+                        CreateAccount(fname, lname, account);
+                    }
+                    else
+                    {
+                        DisplayMenu();
+                    }
                 }
                 else
                 {
                     ActionMenu.DisplayAccounts(mMenuAccounts);
 
-
-                    //ActionMenu.DisplayActionMenu(mMenuAccounts);
                 }
-
-               
+ 
             }
-            catch ( Exception ex)
-            {
-                /*var debaccount = Program.custAccounts.First();
-                Console.WriteLine("{0}", debaccount);*/
-                Console.WriteLine("No Such Account exists in your Name ");
-                Console.WriteLine("Create Account of Type Accessed? ( Yes or No )");
-
-                var reply = Console.ReadLine();
-
-                if (reply == "Yes")
-                {
-                    CreateAccount(fname, lname, account);
-                }
-                else
-                {
-                    DisplayMenu();
-                }
-              
-            
-            }
-            
-          
-        }
 
 
-        public static void ProcessAction( string option)
+        public static void ProcessAction(string option)
         {
 
             switch (option)
@@ -151,7 +149,7 @@ namespace BankingApp
                 case "CD":
                     //CD
                     //Check for Account
-                    AccountCheck( Program.fName,  Program.lName,  option);
+                    AccountCheck(Program.fName, Program.lName, option);
                     //CD Options Pointer
                     Program.menuOption = option;
                     break;
@@ -162,9 +160,31 @@ namespace BankingApp
                     //Loan Options Pointer
                     Program.menuOption = option;
                     break;
+                case "Open Account":
+                    //To Open Account
+                    Console.WriteLine("Which of the following account types would you like to open?");
+                    Console.WriteLine("\t - Checking");
+                    Console.WriteLine("\t - Business");
+                    Console.WriteLine("\t - CD");
+                    Console.WriteLine("\t - Loan");
+                    Console.WriteLine("\t - Exit");
+                    Console.WriteLine("Please type your selection");
+
+                    var openType = Console.ReadLine();
+
+                    if (openType != "Exit")
+                    {
+                        MainMenu.CreateAccount(Program.fName, Program.lName, openType);
+                    }
+                    else
+                    {
+                        MainMenu.DisplayMenu();
+                    }
+
+                    break;
 
                 case "Exit":
-                
+
                     Register.WelcomePrompt();
                     break;
 
@@ -174,10 +194,9 @@ namespace BankingApp
             }
 
 
-            
+
             ;
         }
-
 
     }
 }

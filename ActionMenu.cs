@@ -8,26 +8,40 @@ namespace BankingApp
    
     class ActionMenu
     {
-        public List<Account> actionAccounts = new List<Account>();
-
+        public static List<Account> actionAccounts = new List<Account>();
+        public static Account operatingAccount { get; set; }
 
        
         public static void DisplayAccounts(List<Account> accounts)
         {
+            ActionMenu.actionAccounts = accounts;
+            Console.WriteLine("Please indicate an account from the following : ");
+            
             var listLength = accounts.Count();
+            int custIndication;
+           
+
             for ( var i = 0; i< listLength; i++)
             {
                 Console.WriteLine(" {0} the index", i);
-                Console.WriteLine("Account {0} - Sum : {1}   Maturity : {2}" , i, accounts[i].sum, ((CD)accounts[i]).maturity);
+                Console.WriteLine("Account {0} - Sum : {1}   Maturity : {2}" , i, actionAccounts[i].sum, ((CD)actionAccounts[i]).maturity);
             };
+
+            Console.WriteLine("Please enter the account number.");
+            
+            custIndication = Convert.ToInt32(Console.ReadLine());
+
+            operatingAccount = actionAccounts[custIndication];
+
+            DisplayActionMenu(custIndication);
         }
 
-        public static void DisplayActionMenu(List<Account> accounts)
+        public static void DisplayActionMenu(int accountIndex)
         {
-            List<Account> actionAccounts = accounts;
-            Console.WriteLine("Account Type {0}", actionAccounts.First().sum);
 
-            string menuOption= actionAccounts.First().accountType;
+            Console.WriteLine("Account Type for the love of god {0}");
+
+            string menuOption = operatingAccount.accountType;
             string action;
             switch (menuOption)
             {
@@ -65,8 +79,6 @@ namespace BankingApp
                     break;
 
                 case "CD":
-
-                    ActionMenu.DisplayAccounts( actionAccounts );
                     //CD Options
                     Console.WriteLine("CD Options");
                     Console.WriteLine("\t1 - Withdraw");

@@ -55,12 +55,12 @@ namespace BankingApp
  
         }
 
-        public Customer RegisterCustomer (string firstn , string lastn)
+      /*  public Customer RegisterCustomer (string firstn , string lastn)
         {
 
             Customer newCust = new Customer(firstn, lastn);
 
             return newCust ;
-        }
+        }*/
     }
 }
