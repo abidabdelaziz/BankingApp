@@ -10,7 +10,7 @@ namespace BankingApp
     {
         public static List<Account> mMenuAccounts = new List<Account>();
 
-        public Account tempAccount {get;set;}
+        public static Account tempAccount {get;set;}
 
         public string menuOption { get; set; }
 
@@ -45,18 +45,30 @@ namespace BankingApp
             {
                 case "Checking":
 
-                    Console.WriteLine("What will be your deposity for the Checking Account?");
+                    Console.WriteLine("What will be your initial deposit for the Checking Account?");
 
                     int checkingDeposit = Convert.ToInt32(Console.ReadLine());
 
+                     MainMenu.tempAccount = new Checking(firstName, lastName, account, checkingDeposit) { };
 
+                    Program.custAccounts.Add((Account)tempAccount);
+                    MainMenu.mMenuAccounts.Add((Account)tempAccount);
+                    Console.WriteLine("Thank you for your business.");
+                    MainMenu.DisplayMenu();
 
                     break;
                 case "Business":
 
-                    Console.WriteLine("What will be your deposity for the Business Account?");
+                    Console.WriteLine("What will be your initial deposit for the Business Account?");
 
                     int businessDeposit = Convert.ToInt32(Console.ReadLine());
+
+                    MainMenu.tempAccount = new Business(firstName, lastName, account, businessDeposit) { };
+
+                    Program.custAccounts.Add((Account)tempAccount);
+                    MainMenu.mMenuAccounts.Add((Account)tempAccount);
+                    Console.WriteLine("Thank you for your business.");
+                    MainMenu.DisplayMenu();
 
                     break;
                 case "CD":
@@ -68,7 +80,7 @@ namespace BankingApp
 
                     int cdDeposit = Convert.ToInt32(Console.ReadLine());
 
-                    CD tempAccount = new CD(firstName, lastName, account, cdMaturity, cdDeposit) { };
+                    MainMenu.tempAccount = new CD(firstName, lastName, account, cdMaturity, cdDeposit) { };
 
                     Program.custAccounts.Add((Account)tempAccount);
                     MainMenu.mMenuAccounts.Add((Account)tempAccount);
@@ -79,9 +91,17 @@ namespace BankingApp
 
                 case "Loan":
 
-                    Console.WriteLine("Please enter a desired amount for your Loan Account.");
+                    Console.WriteLine("Please enter a desired amount for your new Loan Account.");
 
                     int loan = Convert.ToInt32(Console.ReadLine());
+
+                    MainMenu.tempAccount = new Loan(firstName, lastName, account, loan) { };
+
+                    Program.custAccounts.Add((Account)tempAccount);
+                    MainMenu.mMenuAccounts.Add((Account)tempAccount);
+                    Console.WriteLine("Thank you for your business.");
+                    MainMenu.DisplayMenu();
+
 
                     break;
 
@@ -103,7 +123,6 @@ namespace BankingApp
            
                 if (!mMenuAccounts.Any())
                 {
-                Console.WriteLine("Hello World");
                 Console.WriteLine("No Such Account exists in your Name ");
                     Console.WriteLine("Create Account of Type Accessed? ( Yes or No )");
 

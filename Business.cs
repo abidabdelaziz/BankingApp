@@ -6,8 +6,8 @@ namespace BankingApp
 {
     class Business : Account
     {
-        public int maturity;
-
+        public static List<Transaction> transactionHistory = new List<Transaction>();
+        public const int overDraft = 500;
 
 
 

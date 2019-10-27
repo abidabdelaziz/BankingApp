@@ -6,8 +6,8 @@ namespace BankingApp
 {
     class Checking : Account
     {
-        public int maturity;
-
+        public static List<Transaction> transactionHistory = new List<Transaction>();
+        public int fixedInterest = 3;
 
 
 

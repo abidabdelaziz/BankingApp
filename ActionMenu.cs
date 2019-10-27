@@ -5,12 +5,13 @@ using System.Text;
 
 namespace BankingApp
 {
-   
+
     class ActionMenu
     {
         public static List<Account> actionAccounts = new List<Account>();
         public static Account operatingAccount { get; set; }
 
+        public static string customerAction {get;set;}
        
         public static void DisplayAccounts(List<Account> accounts)
         {
@@ -24,25 +25,24 @@ namespace BankingApp
             for ( var i = 0; i< listLength; i++)
             {
                 Console.WriteLine(" {0} the index", i);
-                Console.WriteLine("Account {0} - Sum : {1}   Maturity : {2}" , i, actionAccounts[i].sum, ((CD)actionAccounts[i]).maturity);
+                Console.WriteLine("Account {0} - Sum : {1}   Maturity : {2}" , i, actionAccounts[i].sum, actionAccounts[i].accountType);
             };
 
             Console.WriteLine("Please enter the account number.");
             
             custIndication = Convert.ToInt32(Console.ReadLine());
+    
 
             operatingAccount = actionAccounts[custIndication];
 
-            DisplayActionMenu(custIndication);
+            DisplayActionMenu(operatingAccount);
         }
 
-        public static void DisplayActionMenu(int accountIndex)
+        public static void DisplayActionMenu(Account account)
         {
 
-            Console.WriteLine("Account Type for the love of god {0}");
-
-            string menuOption = operatingAccount.accountType;
-            string action;
+            string menuOption = account.accountType;
+            
             switch (menuOption)
             {
                
@@ -58,8 +58,9 @@ namespace BankingApp
                     Console.WriteLine("\t6 - Back");
                     Console.WriteLine("\t7 - Exit");
 
-                    action = Console.ReadLine();
+                    ActionMenu.customerAction = Console.ReadLine();
 
+                    AccountOperations.FindAccount(operatingAccount, customerAction);
 
                     break;
                 case "Business":
@@ -74,7 +75,9 @@ namespace BankingApp
                     Console.WriteLine("\t6 - Back");
                     Console.WriteLine("\t7 - Exit");
 
-                    action = Console.ReadLine();
+                    ActionMenu.customerAction = Console.ReadLine();
+
+                    AccountOperations.FindAccount(operatingAccount, customerAction);
 
                     break;
 
@@ -85,7 +88,9 @@ namespace BankingApp
                     Console.WriteLine("\t2 - Back");
                     Console.WriteLine("\t3 - Exit");
 
-                    action = Console.ReadLine();
+                    ActionMenu.customerAction = Console.ReadLine();
+
+                    AccountOperations.FindAccount(operatingAccount, customerAction);
 
                     break;
 
@@ -93,18 +98,21 @@ namespace BankingApp
 
                     //Loan Options
                     Console.WriteLine("Loan Options");
-                    Console.WriteLine("\t1 - Deposit-Payment");
+                    Console.WriteLine("\t1 - Payment");
                     Console.WriteLine("\t2 - Transaction History");
                     Console.WriteLine("\t3 - Back");
                     Console.WriteLine("\t4 - Exit");
 
-                    action = Console.ReadLine();
+                    ActionMenu.customerAction = Console.ReadLine();
+
+                    AccountOperations.FindAccount(operatingAccount, customerAction);
 
                     break;
 
                 default:
 
-                   
+                    DisplayActionMenu(operatingAccount);
+
                     break;
             }
         }

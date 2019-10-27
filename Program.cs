@@ -18,16 +18,10 @@ namespace BankingApp
         {
             bool endApp = false;
          
-            while (!endApp)
-            {
-                bool exitMenu = false;
+            while (!endApp) { 
+            
 
                 Register.WelcomePrompt();
-
-                
-                //Console.WriteLine("Welcome {0} {1} ", currentCustomer.firstName, currentCustomer.lastName  );
-
-                //MainMenu.DisplayMenu();
 
             }
 

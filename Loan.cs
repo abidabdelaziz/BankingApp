@@ -6,7 +6,7 @@ namespace BankingApp
 {
     class Loan : Account
     {
-        public int maturity;
+        public static List<Transaction> transactionHistory= new List<Transaction>();
 
 
 
