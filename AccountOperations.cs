@@ -8,13 +8,14 @@ namespace BankingApp
     {
         public static string custAction { get; set; }
         public static Account operatingAccount { get; set; }
-        public static int operatingIndex { get; set; }
+        public static int originIndex { get; set; }
         public static void FindAccount(Account account, string action)
         {
             AccountOperations.operatingAccount = account;
             AccountOperations.custAction = action;
             //Handling Duplicates is an issue
             int toOperate = Program.custAccounts.IndexOf(account);
+            AccountOperations.originIndex = toOperate;
             
             Console.WriteLine(" The sum of the selected  account is {0} for a {1}", Program.custAccounts[toOperate].sum, custAction);
 
@@ -23,13 +24,14 @@ namespace BankingApp
 
         public static void LogTransaction(string firstname,
                                           string lastname,
-                                          string timestamp,
+                                          DateTime timestamp,
                                           string transtype,
-                                          string accounttype,
                                           int transamount)
         {
-            Transaction transObject = new Transaction(firstname, lastname, timestamp, transtype, accounttype, transamount);
-            Program.custAccounts[operatingIndex].TransactionHistory.Add(transObject);
+            Transaction transObject = new Transaction(firstname, lastname, timestamp, transtype, transamount);
+            Program.custAccounts[originIndex].TransactionHistory.Add(transObject);
+
+
         }
         public static void SwitchAction(string action)
         {
@@ -39,7 +41,7 @@ namespace BankingApp
 
                     Console.WriteLine("How much would you like to deposit?");
 
-                    var depAmount = Convert.ToInt32(Console.ReadLine());
+                    int depAmount = Convert.ToInt32(Console.ReadLine());
 
                     Console.WriteLine("Processing deposit.");
 
@@ -77,9 +79,7 @@ namespace BankingApp
                     break;
                 case "Transaction History":
 
-                    Console.WriteLine("Which account would you like to review transaction history?");
-
-                    var transHisAccount = Convert.ToInt32(Console.ReadLine());
+                    TransactionHistory();
 
                     break;
 
@@ -104,20 +104,56 @@ namespace BankingApp
         }
         public static void MakeDeposit(int amount)
         {
-            Program.custAccounts[operatingIndex].sum += amount;
+            Program.custAccounts[originIndex].sum += amount;
+
+            DateTime tStamp = DateTime.Now;
+
+            LogTransaction(operatingAccount.firstName,
+                           operatingAccount.lastName,
+                           tStamp,
+                           custAction,
+                           amount);
         }
 
         public static void MakeWithdrawal(int amount)
         {
-            Program.custAccounts[operatingIndex].sum -= amount;
+            Program.custAccounts[originIndex].sum -= amount;
+
+            DateTime tStamp = DateTime.Now;
+
+            LogTransaction(operatingAccount.firstName,
+                         operatingAccount.lastName,
+                         tStamp,
+                         custAction,
+                         amount);
 
             //Case for Overdraft needs implementation
 
         }
 
+        public static void TransactionHistory()
+        {
+            List < Transaction > transactions = operatingAccount.TransactionHistory;
+            int listLength = transactions.Count;
+
+            for (var i = 0; i < listLength; i++)
+            {
+                Console.WriteLine(" {0} the index", i);
+                Console.WriteLine("Account {0} :{1} {2} - Amount : {3}   Type : {4}", i, transactions[i].fName, 
+                                                                                        transactions[i].lName, 
+                                                                                        transactions[i].transAmount, 
+                                                                                        transactions[i].transType);
+            };
+
+            Console.WriteLine("Press any key to continue.");
+
+            string proceed = Console.ReadLine();
+        }
         public static void CloseAccount(int index)
         {
             Program.custAccounts.RemoveAt(index);
+
+
 
             //Devbug
 
