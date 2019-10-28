@@ -21,6 +21,16 @@ namespace BankingApp
             SwitchAction(action);
         }
 
+        public static void LogTransaction(string firstname,
+                                          string lastname,
+                                          string timestamp,
+                                          string transtype,
+                                          string accounttype,
+                                          int transamount)
+        {
+            Transaction transObject = new Transaction(firstname, lastname, timestamp, transtype, accounttype, transamount);
+            Program.custAccounts[operatingIndex].TransactionHistory.Add(transObject);
+        }
         public static void SwitchAction(string action)
         {
             switch (action)
