@@ -25,7 +25,7 @@ namespace BankingApp
             for ( var i = 0; i< listLength; i++)
             {
                 Console.WriteLine(" {0} the index", i);
-                Console.WriteLine("Account {0} - Sum : {1}   Maturity : {2}" , i, actionAccounts[i].sum, actionAccounts[i].accountType);
+                Console.WriteLine("Account {0} - Sum : {1}   Sum : {2}" , i, actionAccounts[i].sum, actionAccounts[i].accountType);
             };
 
             Console.WriteLine("Please enter the account number.");
