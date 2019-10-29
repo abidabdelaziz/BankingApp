@@ -110,7 +110,7 @@ namespace BankingApp
 
                 default:
 
-                    DisplayActionMenu(operatingAccount);
+                    DisplayAccounts(actionAccounts);
 
                     break;
             }

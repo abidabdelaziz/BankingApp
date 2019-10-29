@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace BankingApp
@@ -9,17 +10,22 @@ namespace BankingApp
         public static string custAction { get; set; }
         public static Account operatingAccount { get; set; }
         public static int originIndex { get; set; }
+        public static string fallbackAction { get; set; }
         public static void FindAccount(Account account, string action)
         {
+            AccountOperations.fallbackAction = action;
             AccountOperations.operatingAccount = account;
             AccountOperations.custAction = action;
             //Handling Duplicates is an issue
             int toOperate = Program.custAccounts.IndexOf(account);
             AccountOperations.originIndex = toOperate;
             
-            Console.WriteLine(" The sum of the selected  account is {0} for a {1}", Program.custAccounts[toOperate].sum, custAction);
+            Console.WriteLine(" You have accessed your {0} Account with sum {1} for a {2}", Program.custAccounts[toOperate].accountType,
+                                                                                           Program.custAccounts[toOperate].sum, 
+                                                                                           custAction);
 
-            SwitchAction(action);
+            // maybe remove fall back action and load message if var is null then fire another menu
+            SwitchAction(custAction);
         }
 
         public static void LogTransaction(string firstname,
@@ -66,15 +72,15 @@ namespace BankingApp
                     break;
                 case "Transfer":
 
-                    Console.WriteLine("How much would you like to transfer?");
-
-                    var transAmount = Convert.ToInt32(Console.ReadLine());
-
+                   
                     Console.WriteLine("To Which Account would you like to transfer?");
 
-                    //Function to display accounts from Program Class
+                    Account transferAccount = ReturnTransferAccount();                
 
-                    var transAccount = Console.ReadLine();
+                    int transferAmount = TransferCheck();
+
+                    MakeTransfer(transferAccount, transferAmount);
+
 
                     break;
                 case "Transaction History":
@@ -96,9 +102,10 @@ namespace BankingApp
                     break;
                 default:
 
-                    FindAccount(operatingAccount, custAction);
+                    ActionMenu.DisplayActionMenu(operatingAccount);
 
                     break;
+             
             }
 
         }
@@ -115,6 +122,77 @@ namespace BankingApp
                            amount);
         }
 
+        public static void MakeTransfer(Account tAccount, int tTransfer)
+        {
+            Program.custAccounts[originIndex].sum -= tTransfer;
+
+            int refIndex = Program.custAccounts.FindIndex(account => account == tAccount);
+
+            Program.custAccounts[refIndex].sum += tTransfer;
+
+            DateTime tStamp = DateTime.Now;
+
+            //Also Log in Account receiving transfer
+            Transaction transObject = new Transaction(Program.custAccounts[refIndex].firstName,
+                Program.custAccounts[refIndex].lastName,
+                tStamp,
+                custAction,
+                tTransfer);
+            Program.custAccounts[refIndex].TransactionHistory.Add(transObject);
+
+            LogTransaction(operatingAccount.firstName,
+                           operatingAccount.lastName,
+                           tStamp,
+                           custAction,
+                           tTransfer);
+            Console.WriteLine("Thank you for your Transfer");
+        }
+
+        public static int TransferCheck()
+        {
+            
+            var choiceValid = false;
+
+            int validTransfer = 0;
+
+            while (!choiceValid)
+            {
+                Console.WriteLine("How much would you like to transfer?");
+
+                int tAmount = Convert.ToInt32(Console.ReadLine());
+
+                if (tAmount < operatingAccount.sum)
+                {
+                    validTransfer = tAmount;
+                    choiceValid = true;
+                   
+                }else
+                {
+                    continue;
+                }
+
+            }
+
+            return validTransfer;
+        }
+
+        public static Account ReturnTransferAccount()
+        {
+            var totransferAccs = Program.custAccounts.Where(item => item.accountType == "Checking" ||
+                                                                   item.accountType == "Business" ||
+                                                                   item.accountType == "Loan").ToList();
+
+            var listLength = totransferAccs.Count();
+
+            for (var i = 0; i < listLength; i++)
+            {
+                Console.WriteLine("Account {0} - Sum : {1}   Type : {2}", i, totransferAccs[i].sum, totransferAccs[i].accountType);
+            };
+
+            int transferChoice = Convert.ToInt32(Console.ReadLine());
+
+            return Program.custAccounts[transferChoice] ;
+        }
         public static void MakeWithdrawal(int amount)
         {
             Program.custAccounts[originIndex].sum -= amount;
@@ -138,7 +216,6 @@ namespace BankingApp
 
             for (var i = 0; i < listLength; i++)
             {
-                Console.WriteLine(" {0} the index", i);
                 Console.WriteLine("Account {0} :{1} {2} - Amount : {3}   Type : {4}", i, transactions[i].fName, 
                                                                                         transactions[i].lName, 
                                                                                         transactions[i].transAmount, 

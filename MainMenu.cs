@@ -80,7 +80,9 @@ namespace BankingApp
 
                     int cdDeposit = Convert.ToInt32(Console.ReadLine());
 
-                    MainMenu.tempAccount = new CD(firstName, lastName, account, cdMaturity, cdDeposit) { };
+                    DateTime tStamp = DateTime.Now;
+
+                    MainMenu.tempAccount = new CD(firstName, lastName, account, cdMaturity, cdDeposit, tStamp);
 
                     Program.custAccounts.Add((Account)tempAccount);
                     MainMenu.mMenuAccounts.Add((Account)tempAccount);
@@ -102,12 +104,6 @@ namespace BankingApp
                     Console.WriteLine("Thank you for your business.");
                     MainMenu.DisplayMenu();
 
-
-                    break;
-
-                default:
-
-                    MainMenu.DisplayMenu();
                     break;
 
             }
@@ -208,8 +204,10 @@ namespace BankingApp
                     break;
 
                 default:
-
+                    Console.WriteLine(" {0} is not valid", option);
+                    MainMenu.DisplayMenu();
                     break;
+
             }
 
 
