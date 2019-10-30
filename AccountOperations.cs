@@ -75,7 +75,7 @@ namespace BankingApp
                    
                     Console.WriteLine("To Which Account would you like to transfer?");
 
-                    Account transferAccount = ReturnTransferAccount();                
+                    int transferAccount = ReturnTransferAccount();                
 
                     int transferAmount = TransferCheck();
 
@@ -99,6 +99,8 @@ namespace BankingApp
 
                     var paymentAmount = Convert.ToInt32(Console.ReadLine());
 
+                    MakeDeposit(paymentAmount);
+
                     break;
                 default:
 
@@ -111,7 +113,13 @@ namespace BankingApp
         }
         public static void MakeDeposit(int amount)
         {
-            Program.custAccounts[originIndex].sum += amount;
+            if (Program.custAccounts[originIndex].accountType == "Loan") {
+                Program.custAccounts[originIndex].sum -= amount;
+            } else {
+                Program.custAccounts[originIndex].sum += amount;
+            }
+            
+
 
             DateTime tStamp = DateTime.Now;
 
@@ -122,23 +130,31 @@ namespace BankingApp
                            amount);
         }
 
-        public static void MakeTransfer(Account tAccount, int tTransfer)
+        public static void MakeTransfer(int tAccount, int tTransfer)
         {
             Program.custAccounts[originIndex].sum -= tTransfer;
 
-            int refIndex = Program.custAccounts.FindIndex(account => account == tAccount);
-
-            Program.custAccounts[refIndex].sum += tTransfer;
-
+            string itatype = Program.custAccounts[tAccount].accountType;
+            Console.WriteLine("Its a {0}!", itatype);
+            if (Program.custAccounts[tAccount].accountType == "Loan")
+            {
+                Console.WriteLine("Its a loan!");
+                Program.custAccounts[tAccount].sum -= tTransfer;
+            }
+            else
+            {
+                Console.WriteLine("Its a {0}{!", Program.custAccounts[tAccount].accountType);
+                Program.custAccounts[tAccount].sum += tTransfer;
+            }
             DateTime tStamp = DateTime.Now;
 
             //Also Log in Account receiving transfer
-            Transaction transObject = new Transaction(Program.custAccounts[refIndex].firstName,
-                Program.custAccounts[refIndex].lastName,
+            Transaction transObject = new Transaction(Program.custAccounts[tAccount].firstName,
+                Program.custAccounts[tAccount].lastName,
                 tStamp,
                 custAction,
                 tTransfer);
-            Program.custAccounts[refIndex].TransactionHistory.Add(transObject);
+            Program.custAccounts[tAccount].TransactionHistory.Add(transObject);
 
             LogTransaction(operatingAccount.firstName,
                            operatingAccount.lastName,
@@ -176,7 +192,7 @@ namespace BankingApp
             return validTransfer;
         }
 
-        public static Account ReturnTransferAccount()
+        public static int ReturnTransferAccount()
         {
             var totransferAccs = Program.custAccounts.Where(item => item.accountType == "Checking" ||
                                                                    item.accountType == "Business" ||
@@ -191,7 +207,7 @@ namespace BankingApp
 
             int transferChoice = Convert.ToInt32(Console.ReadLine());
 
-            return Program.custAccounts[transferChoice] ;
+            return transferChoice ;
         }
         public static void MakeWithdrawal(int amount)
         {

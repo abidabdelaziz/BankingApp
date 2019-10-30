@@ -7,6 +7,8 @@ namespace BankingApp
     class Business : Account
     {
         public static List<Transaction> transactionHistory = new List<Transaction>();
+
+        //Look up Clamp operation to limit range
         public const int overDraft = 500;
 
 
